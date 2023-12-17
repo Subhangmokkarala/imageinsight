@@ -16,8 +16,6 @@ pip install torch torchvision python-telegram-bot Pillow
 ```
 ``
 
-
-
 # Hardware Used
 
 ## Model
@@ -34,7 +32,7 @@ cd image-insight-bot
 pip install -r requirements.txt
 ```
 
-#Run the bot:
+# Run the bot:
 ```
 python imageinsightbot.py
 ```
@@ -45,5 +43,5 @@ python imageinsightbot.py
 # Contributing
 Contributions are welcome! If you find any issues or have suggestions for improvements, feel free to open an issue or create a pull request.
 
-#License
+# License
 This project is licensed under the MIT License - see the LICENSE file for details.
