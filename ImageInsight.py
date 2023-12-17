@@ -38,7 +38,7 @@ model.load_state_dict(torch.load(MODEL_PATH, map_location='cpu'))
 model.eval()
 
 # Telegram bot token (replace with your actual token)
-TOKEN = '6713201868:AAE-CcAewIIDfbKafY5QkaY6pxoORb7613Q'
+TOKEN = 'use_your_own_token'
 
 def classify_image(update: Update, context: CallbackContext) -> None:
     if update.message.photo:

@@ -10,7 +10,7 @@ from telegram.ext import UpdateQueue
 update_queue = UpdateQueue()
 
 # Replace with your actual Telegram bot token
-TOKEN = '6713201868:AAE-CcAewIIDfbKafY5QkaY6pxoORb7613Q'
+TOKEN = 'use your token'
 
 # Path to your h5 model file
 MODEL_PATH = 'cifar10.h5'
