@@ -13,9 +13,9 @@ Ensure you have the following requirements installed before running the bot:
 
 ```bash
 pip install torch torchvision python-telegram-bot Pillow
+</br>
 
-
-## Hardware Used
+# Hardware Used
 
 ## Model
 The bot uses a pre-trained image identification model. The current version of the bot uses a custom-trained model on the CIFAR-10 dataset. The PyTorch framework is utilized for the model implementation.
