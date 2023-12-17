@@ -12,8 +12,7 @@ Image Insight Bot is a simple Telegram bot designed to identify and describe ima
 Ensure you have the following requirements installed before running the bot:
 
 ```bash
-pip install torch torchvision python-telegram-bot Pillow
-``
+pip install torch torchvision python-telegram-bot Pillow``
 
 
 
