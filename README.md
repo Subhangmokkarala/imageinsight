@@ -13,7 +13,9 @@ Ensure you have the following requirements installed before running the bot:
 
 ```bash
 pip install torch torchvision python-telegram-bot Pillow
-</br>
+``
+
+
 
 # Hardware Used
 
