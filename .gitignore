@@ -1,3 +1,4 @@
 test/
 User_data/
 *.h5
+*.pth
