@@ -1,16 +1,13 @@
-from telegram.ext import Updater, CommandHandler, MessageHandler, CallbackContext
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 from telegram import Update
+from PIL import Image
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.models import load_model
-from PIL import Image
+import numpy as np
 import io
-from telegram.ext import UpdateQueue
-
-# Create an UpdateQueue
-update_queue = UpdateQueue()
 
 # Replace with your actual Telegram bot token
-TOKEN = 'use your token'
+TOKEN = "your_token_here"
 
 # Path to your h5 model file
 MODEL_PATH = 'cifar10.h5'
@@ -19,48 +16,45 @@ MODEL_PATH = 'cifar10.h5'
 model = load_model(MODEL_PATH)
 
 def predict_image(update: Update, context: CallbackContext) -> None:
-  if update.message.photo:
-    # Download the photo
-    file_id = update.message.photo[-1].file_id
-    file = context.bot.get_file(file_id)
-    file_data = file.download_as_bytearray()
+    if update.message.photo:
+        # Download the photo
+        file_id = update.message.photo[-1].file_id
+        file = context.bot.get_file(file_id)
+        file_data = file.download_as_bytearray()
 
-    # Convert downloaded data to PIL Image
-    image_data = Image.open(io.BytesIO(file_data))
+        # Convert downloaded data to PIL Image
+        image_data = Image.open(io.BytesIO(file_data))
 
-    # Preprocess the image for prediction
-    image_tensor = image.img_to_array(image_data.resize((32, 32)))
-    image_tensor = image_tensor / 255.0
-    image_tensor = image_tensor.reshape((1, 32, 32, 3))
+        # Preprocess the image for prediction
+        image_tensor = image.img_to_array(image_data.resize((32, 32)))
+        image_tensor = image_tensor / 255.0
+        image_tensor = image_tensor.reshape((1, 32, 32, 3))
 
-    # Make a prediction using the model
-    prediction = model.predict(image_tensor)
-    predicted_class = np.argmax(prediction)
+        # Make a prediction using the model
+        prediction = model.predict(image_tensor)
+        predicted_class = np.argmax(prediction)
 
-    # Map predictions to class names (adjust these if needed)
-    class_names = ['Airplane', 'Automobile', 'Bird', 'Cat', 'Deer', 'Dog', 'Frog', 'Horse', 'Ship', 'Truck']
+        # Map predictions to class names (adjust these if needed)
+        class_names = ['Airplane', 'Automobile', 'Bird', 'Cat', 'Deer', 'Dog', 'Frog', 'Horse', 'Ship', 'Truck']
 
-    # Send prediction to Telegram chat
-    update.message.reply_text(f"Predicted Class: {class_names[predicted_class]}")
-  else:
-    update.message.reply_text('Please send an image for classification.')
+        # Send prediction to Telegram chat
+        update.message.reply_text(f"Predicted Class: {class_names[predicted_class]}")
+    else:
+        update.message.reply_text('Please send an image for classification.')
 
 def main() -> None:
-  # Create an UpdateQueue
-  update_queue = UpdateQueue()
+    # Use the update queue with Updater
+    updater = Updater(token=TOKEN, use_context=True)
+    dispatcher = updater.dispatcher
 
-  # Use the update queue with Updater
-  updater = Updater(token=TOKEN, update_queue=update_queue)
-  dispatcher = updater.dispatcher
+    # Register handlers
+    dispatcher.add_handler(MessageHandler(Filters.photo, predict_image))
 
-  # Register handlers
-  dispatcher.add_handler(MessageHandler(Filters.photo, predict_image))
+    # Start the bot
+    updater.start_polling()
 
-  # Start the bot
-  updater.start_polling()
-
-  # Run the bot until you send a signal to stop
-  updater.idle()
+    # Run the bot until you send a signal to stop
+    updater.idle()
 
 if __name__ == '__main__':
-  main()
+    main()
