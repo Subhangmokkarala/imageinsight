@@ -2,3 +2,4 @@ test/
 User_data/
 *.h5
 *.pth
+__pycache__/

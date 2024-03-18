@@ -1,0 +1,5 @@
+python-telegram-bot==13.13
+requests
+
+# Install the required packages
+pip install -r requirements.txt

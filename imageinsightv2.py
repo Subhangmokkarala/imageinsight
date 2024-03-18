@@ -1,10 +1,20 @@
-from telegram.ext import Updater, Filters, CommandHandler, MessageHandler
+from telegram.ext import Updater, filters, CommandHandler, MessageHandler
 import cv2
 from tensorflow.keras.applications.resnet50 import ResNet50
 import numpy as np
 from labels import lbl
 import os
 from datetime import datetime
+
+import pyfiglet
+from pyfiglet import Figlet
+
+f = Figlet(font='slant')
+
+def print_figlet(text):
+    print(f.renderText(text))
+
+print_figlet('Hello, Mr Mokkarala !')
 
 model = ResNet50()
 
@@ -57,9 +67,9 @@ dispatcher = updater.dispatcher
 dispatcher.add_handler(CommandHandler("start", start))
 dispatcher.add_handler(CommandHandler("help", help_))
 
-dispatcher.add_handler(MessageHandler(Filters.text, message))
+dispatcher.add_handler(MessageHandler(filters.text, message))
 
-dispatcher.add_handler(MessageHandler(Filters.photo, image))
+dispatcher.add_handler(MessageHandler(filters.photo, image))
 
 
 updater.start_polling()
