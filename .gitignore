@@ -1,5 +1,6 @@
 test/
 User_data/
 *.h5
-*.pth
+*.pthS
 __pycache__/
+*.env
