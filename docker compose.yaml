@@ -1,0 +1,38 @@
+imageinsightbot:
+  container_name: imageinsightbot
+  build:
+    context: .
+    dockerfile: Dockerfile
+  image: imageinsightbot
+
+  ports:
+    - "5000:5000"
+  environment:
+    bot_token- "your_bot_token"
+  
+volumes:
+  imageinsightbot:
+    driver: local
+
+networks:
+  imageinsightbot:
+    driver: bridge
+
+services: 
+  imageinsightbot:
+    container_name: imageinsightbot
+    image: imageinsightbot
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - imageinsightbot:/app
+    networks:
+      - imageinsightbot
+    ports:
+      - "5000:5000"
+    #environment:
+    #  - FLASK_APP=app.py
+    #  - FLASK_ENV=development
+    #  - FLASK_RUN_HOST=
+

@@ -6,7 +6,6 @@ RUN apt-get update && apt-get install -y
 RUN apt install python3-pip -y
 RUN pip3 install requirements.txt
 
-COPY . /imageinsightapp
-WORKDIR /imageinsightapp
+COPY . /usr/src/app/
 
 CMD ["python3", "imageinsight.py"]
